@@ -5,6 +5,7 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+nltk.download()
 
 def fakenews(statement):
     loaded_model = pickle.load(open("model.pickle.dat", "rb"))
