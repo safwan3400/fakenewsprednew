@@ -3,11 +3,8 @@ import numpy as np
 
 import re
 import nltk
-nltk.download()
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
-import xgboost
-import xgboost.compat
 
 
 def fakenews(statement):
