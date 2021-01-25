@@ -1,4 +1,6 @@
 from flask import Flask, render_template, request, jsonify
+import nltk
+nltk.download()
 
 
 from feature import *
