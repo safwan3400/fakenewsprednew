@@ -10,6 +10,11 @@ import re
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+loaded_model = pickle.load(open("model.pickle.dat", "rb"))
+wordnet=WordNetLemmatizer()
+cv = TfidfVectorizer()
 
 app = Flask(__name__)
 
@@ -26,8 +31,7 @@ def predict():
         author_name = request.form['author_name']
         text = request.form['text']
         statement = news_title + " " + author_name + " " + text
-        loaded_model = pickle.load(open("model.pickle.dat", "rb"))
-        wordnet=WordNetLemmatizer()
+        
         review = re.sub('[^a-zA-Z]', ' ', statement)
         review= review.lower()
         review= review.split()
@@ -36,8 +40,8 @@ def predict():
         
         corpus_test = []    
         corpus_test.append(review)
-        from sklearn.feature_extraction.text import TfidfVectorizer
-        cv = TfidfVectorizer()
+        
+        
         X = cv.fit_transform(corpus_test).toarray()
         length = 5000 - len(X[0])
         X = np.pad(X, (0, length), mode = 'mean')
